@@ -1,40 +1,51 @@
-@import '../../App.scss'; 
+@use '../../abstracts' as *;
 
+.navbar {
+    height: 80px;
+    position: relative;
+    width: 100%;
+    z-index: 100;
+    background: transparent;
 
-.navbar{
-    height: 100px;
-    // width: 100%;
-    // margin-left: 10%;
-    //     margin-right: 10%;
-
-    .wrapper{
-        max-width: 1066px;
+    .wrapper {
+        max-width: 1200px;
         margin: auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
         height: 100%;
+        padding: 0 20px;
 
-        @include mobile{
-            justify-content: flex-end;
-            padding: 20px;
+        @include mobile {
+            justify-content: space-between;
+            padding: 0 20px;
         }
 
-        span{
-            font-weight: bold;
+        .logo {
+            font-weight: 700;
+            font-size: 24px;
+            background: linear-gradient(120deg, $text-color, $accent-color);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
 
-
-            @include mobile{
-                display: none;
+            @include mobile {
+                font-size: 20px;
             }
         }
-        .social{
+
+        .social {
             display: flex;
             gap: 20px;
 
-            img{
-                width: 18px;
-                height: 18px;
+            img {
+                width: 20px;
+                height: 20px;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.2);
+                }
             }
         }
     }

@@ -1,0 +1,24 @@
+// Variables
+$bg-color: #0b0c15;
+$text-color: #e0e0e0;
+$accent-color: #6c63ff;
+$secondary-color: #2a2b38;
+
+// Mixins
+@mixin mobile {
+    @media (max-width: 738px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (max-width: 1366px) {
+        @content;
+    }
+}

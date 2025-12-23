@@ -1,4 +1,5 @@
-@import '../../App.scss';
+@use '../../abstracts' as *;
+
 .services {
     background: linear-gradient(180deg, #0c0c1d, #111132);
     height: 100%;
@@ -15,13 +16,13 @@
         align-items: center;
         gap: 20px;
 
-        @include mobile{
+        @include mobile {
             align-self: center;
             text-align: center;
             flex-direction: column;
         }
 
-        h1{
+        h1 {
             font-size: 90px;
             text-align: center;
             justify-content: center;
@@ -51,7 +52,7 @@
         flex-direction: column;
         align-items: center;
 
-        @include mobile{
+        @include mobile {
             width: 100%;
         }
 
@@ -60,10 +61,10 @@
             align-items: center;
             gap: 50px;
 
-            @include mobile{
-              flex-direction: column;
-              text-align: center;
-              gap: 20px;
+            @include mobile {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
             }
 
             img {
@@ -72,7 +73,7 @@
                 border-radius: 50px;
                 object-fit: cover;
 
-                @include mobile{
+                @include mobile {
                     width: 200px;
                     height: 50px;
                 }
@@ -82,7 +83,7 @@
                 font-size: 66px;
                 font-weight: 300;
 
-                @include mobile{
+                @include mobile {
                     font-size: 36px;
                 }
             }
@@ -96,7 +97,7 @@
                 font-size: 24px;
                 cursor: pointer;
 
-                @include mobile{
+                @include mobile {
                     width: 150px;
                     height: 50px;
                     font-size: 16px;
@@ -116,45 +117,47 @@
         max-width: 1066px;
         margin: auto;
 
-        @include mobile{
+        @include mobile {
             flex-direction: column;
             width: 100%;
         }
-        .box{
+
+        .box {
             padding: 20px;
             border: 0.5px solid white;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            @include mobile{
+
+            @include mobile {
                 border: none;
                 align-items: center;
             }
 
-            p{
-                @include mobile{
-                  display: none;
-                  gap: 10px;
-                  padding: 5px;
+            p {
+                @include mobile {
+                    display: none;
+                    gap: 10px;
+                    padding: 5px;
                 }
             }
 
-            button{
+            button {
                 padding: 10px;
                 background-color: orange;
                 border: none;
                 cursor: pointer;
 
-                @include mobile{
+                @include mobile {
                     background-color: transparent;
-                    border:  1px solid orange;
+                    border: 1px solid orange;
                     border-radius: 5px;
                     color: orange;
-                    width: 50%; 
+                    width: 50%;
                     transform: none !important;
-                    background-color:#111132 !important;
+                    background-color: #111132 !important;
                     padding: 5px;
-                  }
+                }
 
             }
         }
