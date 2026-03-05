@@ -34,6 +34,10 @@ section {
     scroll-snap-align: center;
 }
 
+section#Homepage {
+    padding-top: 80px;
+}
+
 @mixin mobile {
     @media (max-width: 738px) {
         @content;

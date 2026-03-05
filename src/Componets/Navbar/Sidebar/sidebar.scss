@@ -7,16 +7,54 @@
     justify-content: center;
 
     .bg {
-        z-index: 999;
+        z-index: 99999;
         position: fixed;
         left: 0;
         top: 0;
         bottom: 0;
         width: 300px;
-        background: linear-gradient(180deg, $secondary-color, $bg-color);
+        background: rgba($secondary-color, 0.92);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-right: 1px solid rgba(255, 255, 255, 0.06);
+        overflow: hidden;
 
         @include mobile {
-            width: 250px;
+            width: 260px;
+        }
+
+        .sidebar-header {
+            position: absolute;
+            top: 75px; // Pushed down to clear the toggle button completely
+            left: 0;
+            right: 0;
+            padding: 0 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            overflow: hidden;
+
+            .sidebar-name {
+                font-size: 18px; // slightly smaller to fit better
+                font-weight: 700;
+                background: linear-gradient(120deg, $text-color, $accent-color);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .sidebar-tagline {
+                font-size: 11px;
+                color: rgba($text-color, 0.4);
+                font-weight: 400;
+                letter-spacing: 0.5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
 
         .links {
@@ -25,30 +63,44 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            text-align: center;
             justify-content: center;
-            gap: 25px;
+            gap: 6px;
+            padding: 0 20px;
         }
 
         a {
-            font-size: 32px;
+            font-size: 18px;
             font-weight: 500;
-            color: $text-color;
-            transition: all 0.3s ease;
+            color: rgba($text-color, 0.7);
+            padding: 12px 20px;
+            border-radius: 10px;
+            transition: all 0.25s ease;
+            display: block;
 
             &:hover {
-                color: $accent-color;
-                letter-spacing: 2px;
+                color: $text-color;
+                background: rgba($accent-color, 0.12);
+                padding-left: 26px;
             }
 
             @include mobile {
-                font-size: 24px;
+                font-size: 16px;
             }
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            padding: 0 28px;
+            font-size: 12px;
+            color: rgba($text-color, 0.25);
         }
     }
 
     button {
-        z-index: 1000;
+        z-index: 100000;
         position: fixed;
         width: 50px;
         height: 50px;

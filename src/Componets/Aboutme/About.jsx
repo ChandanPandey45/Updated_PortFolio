@@ -1,5 +1,5 @@
 import "./about.scss";
-import { animate, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { FaHtml5, FaGraduationCap, FaTrophy } from "react-icons/fa";
 
@@ -15,22 +15,17 @@ const Variants = {
     y: 0,
     transition: {
       duration: 1,
-      straggerChildren: 0.1,
+      staggerChildren: 0.1,
     },
   },
 };
 
 const About = () => {
-  // Set initial state to "skills" content
-  const [content, setContent] = useState({
-    text: "HTML, CSS, JavaScript, React, Node.js , Mongodb",
-    icon: <FaHtml5 />,
-  });
+  const [activeTab, setActiveTab] = useState("skills");
 
-  // Define the information for each button
   const data = {
     skills: {
-      text: "HTML, CSS, JavaScript, React, Node.js , Mongodb",
+      text: "HTML, CSS, JavaScript, React.js, Node.js, Express.js, MongoDB, Git & GitHub",
       icon: <FaHtml5 />,
     },
     education: {
@@ -38,22 +33,22 @@ const About = () => {
       icon: <FaGraduationCap />,
     },
     achievements: {
-      text: "Experience in real-time industry projects, Web Development Intern at Predulive, participation in events such as hackathons and coding competitions.",
+      text: "Web Development Intern at Predulive EduTech; optimized website load time by 40%. Participated in Hackathons and Coding Competitions. Built 6+ real-world full-stack projects.",
       icon: <FaTrophy />,
     },
   };
 
-  // Function to update content based on button clicked
   const handleInformation = (infoType) => {
-    setContent(data[infoType]);
+    setActiveTab(infoType);
   };
 
   return (
-    <div
+    <motion.div
       className="about"
-      Variants={Variants}
+      variants={Variants}
       initial="initial"
-      animate={animate}
+      whileInView="animate"
+      viewport={{ once: true }}
     >
       <div className="text">
         <h1>About Me</h1>
@@ -61,86 +56,98 @@ const About = () => {
       <div className="wrapper">
         <div className="column-container">
           {/* Left Column */}
-          <div className="textContainer" Variants={Variants}>
+          <motion.div className="textContainer" variants={Variants}>
             <div className="box">
               <div className="heading">
-                {" "}
                 <h1>Introduction</h1>
               </div>
               <motion.h2 whileHover={{ color: "rebeccapurple" }}>
-                Currently I'm working as a FullStack Developer at Predulive
-                EduTech Foundation.
+                Full Stack Developer &amp; Internship Experience at Predulive EduTech Foundation.
               </motion.h2>
               <motion.p>
-                As a Full Stack Developer Intern at Predulive Edutech
-                Foundation, I optimized website load time by over 40% and
-                developed responsive, user-friendly pages. Collaborating on
-                projects like "Leaders Boli," I enhanced cross-browser
-                compatibility and UI/UX. This experience sharpened my skills in
-                HTML, CSS, JavaScript, and React.
+                As a Full Stack Developer Intern at Predulive Edutech Foundation, I optimized
+                website load time by over 40% and developed responsive, user-friendly pages.
+                Collaborating on projects like "Leaders Boli," I enhanced cross-browser compatibility
+                and UI/UX. Skilled in HTML, CSS, JavaScript, React, Node.js, and MongoDB.
               </motion.p>
               <div className="buttons">
-                {/* Skills button is always selected and cannot change the content */}
-                <button onClick={() => handleInformation("skills")}>
+                <button
+                  className={activeTab === "skills" ? "selected" : ""}
+                  onClick={() => handleInformation("skills")}
+                >
                   Skills
                 </button>
                 <button
-                  className="selected"
+                  className={activeTab === "education" ? "selected" : ""}
                   onClick={() => handleInformation("education")}
                 >
                   Education
                 </button>
-                <button onClick={() => handleInformation("achievements")}>
+                <button
+                  className={activeTab === "achievements" ? "selected" : ""}
+                  onClick={() => handleInformation("achievements")}
+                >
                   Achievements
                 </button>
               </div>
-              {/* Display the content based on the selected button */}
               <div className="content">
-                {content.icon && <span className="icon">{content.icon}</span>}
-                <p>{content.text}</p>
+                {data[activeTab].icon && <span className="icon">{data[activeTab].icon}</span>}
+                <p>{data[activeTab].text}</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column */}
-          {/* Right Column */}
-          <div className="skillContainer">
-            <h2>Skills</h2>
+          <motion.div className="skillContainer" variants={Variants}>
+            <h2>Tech Stack</h2>
             <div className="skill">
-              {/* Individual Skills */}
               <div className="iconImage">
                 <img src="/html.png" alt="HTML" />
-                <p className="description">HTML: Markup Language</p>
+                <div className="skill-info">
+                  <p className="description">HTML</p>
+                  <div className="bar"><span style={{ width: "95%" }}></span></div>
+                </div>
               </div>
               <div className="iconImage">
                 <img src="/css.png" alt="CSS" />
-                <p className="description">CSS: Styling Language</p>
+                <div className="skill-info">
+                  <p className="description">CSS / SCSS</p>
+                  <div className="bar"><span style={{ width: "90%" }}></span></div>
+                </div>
               </div>
               <div className="iconImage">
                 <img src="/react.png" alt="React" />
-                <p className="description">React: JavaScript Library</p>
-              </div>
-              <div className="iconImage">
-                <img src="/figma.png" alt="Figma" />
-                <p className="description">Figma: UI/UX Design Tool</p>
+                <div className="skill-info">
+                  <p className="description">React.js</p>
+                  <div className="bar"><span style={{ width: "85%" }}></span></div>
+                </div>
               </div>
               <div className="iconImage">
                 <img src="/node.png" alt="Node.js" />
-                <p className="description">Node.js: Backend Framework</p>
+                <div className="skill-info">
+                  <p className="description">Node.js / Express</p>
+                  <div className="bar"><span style={{ width: "80%" }}></span></div>
+                </div>
               </div>
-              {/* <div className="iconImage">
-                <img src="/graphql.png" alt="GraphQL" />
-                <p className="description">GraphQL: API Query Language</p>
-              </div> */}
               <div className="iconImage">
                 <img src="/mongodb.png" alt="MongoDB" />
-                <p className="description">MongoDB: NoSQL Database</p>
+                <div className="skill-info">
+                  <p className="description">MongoDB</p>
+                  <div className="bar"><span style={{ width: "78%" }}></span></div>
+                </div>
+              </div>
+              <div className="iconImage">
+                <img src="/figma.png" alt="Figma" />
+                <div className="skill-info">
+                  <p className="description">Figma / Design</p>
+                  <div className="bar"><span style={{ width: "70%" }}></span></div>
+                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

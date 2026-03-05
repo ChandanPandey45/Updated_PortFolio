@@ -1,79 +1,182 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-unknown-property */
 import './portfolio.scss'
-import { useRef } from 'react'
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FiGithub, FiExternalLink } from 'react-icons/fi'
 
-const items = [
+const projects = [
     {
         id: 1,
-        title: "Chat App",
-        img: '/ChatApp.png',
-        desc: "A real-time chat application with instant messaging, group chats, media sharing, and notifications. Features a responsive UI, secure authentication, and cross-device compatibility for seamless communication."
+        title: "Real Estate App",
+        category: "Full Stack",
+        img: '/Real State.jpg',
+        desc: "Full-stack room rental platform with Google Maps, JWT auth, role-based access, distance filtering, and an owner dashboard.",
+        tech: ["React", "Node.js", "MongoDB", "Express", "Maps API"],
+        demo: "https://github.com/ChandanPandey45/",
+        github: "https://github.com/ChandanPandey45/",
+        featured: true,
     },
     {
         id: 2,
-        title: "Imagistics",
-        img: "/Imagistics.png",
-        desc: "Developed a real time web platform featuring the power to convert the words into Image using a API by using the Tokens for each time to Use."
+        title: "Chat App",
+        category: "Full Stack",
+        img: '/ChatApp.png',
+        desc: "Real-time chat app with instant messaging, group chats, media sharing, secure auth, and cross-device compatibility.",
+        tech: ["React", "Socket.IO", "Node.js", "MongoDB"],
+        demo: "https://github.com/ChandanPandey45/",
+        github: "https://github.com/ChandanPandey45/",
+        featured: true,
     },
     {
         id: 3,
-        title: "Weather App",
-        img: "/Weather.jpg",
-        desc: "Developed a responsive weather forecast app with HTML, CSS, and JavaScript, integrating a weather API for real-time updates. Enabled users to search cities for instant weather details, including temperature, wind speed, and humidity. This project highlights skills in front-end design, API integration, and interactive UI development. "
+        title: "Imagistics",
+        category: "Frontend",
+        img: '/Imagistics.png',
+        desc: "AI-powered image generation platform converting text prompts to images. Token-based usage system with a clean React UI.",
+        tech: ["React", "AI/API", "JavaScript"],
+        demo: "https://github.com/ChandanPandey45/",
+        github: "https://github.com/ChandanPandey45/",
     },
     {
         id: 4,
-        title: "NetFlix Clone",
-        img: "/Netflix.webp",
-        desc: "Developed a Netflix clone using Html, CSS and JavaScript for the purpose of the learnig."
+        title: "Password Mania",
+        category: "Frontend",
+        img: '/Password Menia.png',
+        desc: "Secure password manager to store, generate, and manage credentials. Strong encryption with a clean, intuitive UI.",
+        tech: ["React", "LocalStorage", "JavaScript"],
+        demo: "https://github.com/ChandanPandey45/",
+        github: "https://github.com/ChandanPandey45/",
     },
-];
-const Single = ({ item }) => {
-    const ref = useRef()
+    {
+        id: 5,
+        title: "Weather App",
+        category: "Frontend",
+        img: '/Weather.jpg',
+        desc: "Responsive weather forecast app with live API integration. Search any city for real-time temperature, wind, and humidity.",
+        tech: ["HTML", "CSS", "JavaScript", "Weather API"],
+        demo: "https://github.com/ChandanPandey45/",
+        github: "https://github.com/ChandanPandey45/",
+    },
+    {
+        id: 6,
+        title: "Netflix Clone",
+        category: "Frontend",
+        img: '/Netflix.webp',
+        desc: "Pixel-perfect Netflix UI clone with responsive layout, movie cards, hover effects, and smooth transitions.",
+        tech: ["HTML", "CSS", "JavaScript"],
+        demo: "https://github.com/ChandanPandey45/",
+        github: "https://github.com/ChandanPandey45/",
+    },
+]
 
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        //   offset:["start start" , "end start"]
-    }); // optional hai cn be cha
+const categories = ["All", "Full Stack", "Frontend"]
 
-    const y = useTransform(scrollYProgress, [0, 1], [-500, 500])
-    return (<section >
-        <div className="container">
-            <div className="wrapper">
-                <div className="imageContainer" ref={ref}>
-                    <img src={item.img} alt="" />
-                </div>
-                <motion.div className="textContainer" style={{ y }} >
-                    <h2>{item.title}</h2>
-                    <p>{item.desc}</p>
-                    <a href="https://github.com/ChandanPandey45/"> <motion.button whileHover={{ background: "white", color: "black" }}> See Demo</motion.button></a>
-                </motion.div>
-            </div>
-        </div>
-
-    </section>
-    );
+const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.97 },
+    visible: (i) => ({
+        opacity: 1, y: 0, scale: 1,
+        transition: { duration: 0.45, delay: i * 0.07, ease: "easeOut" }
+    }),
+    exit: { opacity: 0, scale: 0.95, transition: { duration: 0.2 } }
 }
-const Portfolio = () => {
-    const ref = useRef();
 
-    const { scrollYProgress } = useScroll({ target: ref, offset: ["end end", "start start"], }); // optional hai cn be changed
-    const scaleX = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-    })
+const Portfolio = () => {
+    const [active, setActive] = useState("All")
+
+    const filtered = active === "All" ? projects : projects.filter(p => p.category === active)
 
     return (
-        <div className='portfolio' ref={ref}>
-            <div className="progress">
-                <h1> My Projects</h1>
-                <motion.div style={{ scaleX }} className='progressBar'></motion.div >
+        <div className='portfolio-v2'>
+            {/* Header */}
+            <motion.div
+                className="portfolio-header"
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+            >
+                <h1>My <span>Projects</span></h1>
+                <p>A selection of real-world apps I've designed, built, and shipped.</p>
+            </motion.div>
+
+            {/* Filter Pills */}
+            <div className="filter-row">
+                {categories.map(cat => (
+                    <button
+                        key={cat}
+                        className={`filter-pill ${active === cat ? 'active' : ''}`}
+                        onClick={() => setActive(cat)}
+                    >
+                        {cat}
+                    </button>
+                ))}
             </div>
-            {items.map(item => (
-                <Single item={item} key={item.id} />
-            ))}
+
+            {/* Grid */}
+            <div className="projects-grid">
+                <AnimatePresence mode="popLayout">
+                    {filtered.map((project, i) => (
+                        <motion.div
+                            className={`project-card ${project.featured ? 'featured' : ''}`}
+                            key={project.id}
+                            variants={cardVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            custom={i}
+                            layout
+                        >
+                            {/* Image */}
+                            <div className="card-image">
+                                <img src={project.img} alt={project.title} />
+                                <div className="image-overlay">
+                                    <div className="overlay-links">
+                                        <a href={project.demo} target="_blank" rel="noreferrer" className="overlay-btn">
+                                            <FiExternalLink /> Live Demo
+                                        </a>
+                                        <a href={project.github} target="_blank" rel="noreferrer" className="overlay-btn outline">
+                                            <FiGithub /> GitHub
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Content */}
+                            <div className="card-content">
+                                <div className="card-meta">
+                                    <span className="category-tag">{project.category}</span>
+                                    {project.featured && <span className="featured-badge">⭐ Featured</span>}
+                                </div>
+                                <h3>{project.title}</h3>
+                                <p>{project.desc}</p>
+                                <div className="tech-stack">
+                                    {project.tech.map(t => <span key={t} className="tech-tag">{t}</span>)}
+                                </div>
+                                <div className="card-actions">
+                                    <a href={project.demo} target="_blank" rel="noreferrer" className="action-btn primary">
+                                        <FiExternalLink /> Live Demo
+                                    </a>
+                                    <a href={project.github} target="_blank" rel="noreferrer" className="action-btn ghost">
+                                        <FiGithub /> GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
+            </div>
+
+            {/* Footer link */}
+            <motion.div
+                className="portfolio-footer"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                viewport={{ once: true }}
+            >
+                <a href="https://github.com/ChandanPandey45" target="_blank" rel="noreferrer">
+                    View all projects on GitHub →
+                </a>
+            </motion.div>
         </div>
     )
 }

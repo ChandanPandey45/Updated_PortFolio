@@ -2,10 +2,14 @@
 
 .navbar {
     height: 80px;
-    position: relative;
+    position: fixed;
+    top: 0;
     width: 100%;
-    z-index: 100;
-    background: transparent;
+    z-index: 9999;
+    background: rgba($bg-color, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
     .wrapper {
         max-width: 1200px;
@@ -14,11 +18,11 @@
         align-items: center;
         justify-content: space-between;
         height: 100%;
-        padding: 0 20px;
+        padding: 0 20px 0 80px;
 
         @include mobile {
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 0 20px 0 80px;
         }
 
         .logo {
@@ -37,13 +41,17 @@
         .social {
             display: flex;
             gap: 20px;
+            align-items: center;
 
-            img {
-                width: 20px;
-                height: 20px;
-                transition: transform 0.3s ease;
+            a {
+                color: rgba($text-color, 0.7);
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+                transition: all 0.3s ease;
 
                 &:hover {
+                    color: $accent-color;
                     transform: scale(1.2);
                 }
             }

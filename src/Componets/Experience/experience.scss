@@ -1,0 +1,210 @@
+@use '../../abstracts' as *;
+
+.experience {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(180deg, $bg-color, $secondary-color);
+    padding: 80px 20px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .heading {
+        text-align: center;
+        margin-bottom: 60px;
+
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: $text-color;
+            padding-bottom: 14px;
+            border-bottom: 2px solid $accent-color;
+            display: inline-block;
+
+            @include mobile {
+                font-size: 30px;
+            }
+        }
+
+        .subtitle {
+            margin-top: 14px;
+            font-size: 16px;
+            color: rgba($text-color, 0.5);
+            font-weight: 400;
+        }
+    }
+
+    .timeline {
+        width: 100%;
+        max-width: 900px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .timeline-item {
+        display: flex;
+        gap: 28px;
+        align-items: flex-start;
+
+        .timeline-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+            padding-top: 28px;
+
+            .dot {
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                flex-shrink: 0;
+                position: relative;
+                z-index: 2;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    inset: -5px;
+                    border-radius: 50%;
+                    background: inherit;
+                    opacity: 0.2;
+                }
+            }
+
+            .line {
+                width: 2px;
+                flex: 1;
+                min-height: 40px;
+                background: linear-gradient(180deg, rgba($accent-color, 0.6), rgba($accent-color, 0.1));
+                margin-top: 8px;
+            }
+        }
+
+        @include mobile {
+            gap: 16px;
+        }
+    }
+
+    .card {
+        flex: 1;
+        background: rgba($secondary-color, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 18px;
+        padding: 30px 32px;
+        margin-bottom: 32px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        cursor: default;
+        transition: all 0.3s ease;
+
+        @include mobile {
+            padding: 20px 18px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+
+            .left {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+
+                .type-badge {
+                    display: inline-block;
+                    width: fit-content;
+                    font-size: 11px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    padding: 4px 12px;
+                    border-radius: 50px;
+                    border: 1px solid transparent;
+                    margin-bottom: 4px;
+                }
+
+                .company {
+                    font-size: 22px;
+                    font-weight: 800;
+                    color: $text-color;
+                    line-height: 1.2;
+
+                    @include mobile {
+                        font-size: 18px;
+                    }
+                }
+
+                .role {
+                    font-size: 15px;
+                    font-weight: 500;
+                    color: rgba($text-color, 0.65);
+
+                    @include mobile {
+                        font-size: 13px;
+                    }
+                }
+            }
+
+            .right {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 6px;
+
+                @include mobile {
+                    align-items: flex-start;
+                }
+
+                .period {
+                    font-size: 14px;
+                    font-weight: 700;
+                    color: $accent-color;
+                    background: rgba($accent-color, 0.1);
+                    padding: 5px 14px;
+                    border-radius: 50px;
+                    border: 1px solid rgba($accent-color, 0.25);
+                }
+
+                .location {
+                    font-size: 13px;
+                    color: rgba($text-color, 0.5);
+                }
+            }
+        }
+
+        .highlights {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+
+            li {
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                font-size: 15px;
+                color: rgba($text-color, 0.75);
+                line-height: 1.65;
+
+                .bullet {
+                    width: 7px;
+                    height: 7px;
+                    border-radius: 50%;
+                    flex-shrink: 0;
+                    margin-top: 8px;
+                }
+
+                @include mobile {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
