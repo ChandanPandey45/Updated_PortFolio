@@ -82,7 +82,24 @@ const cardVariants = {
 const Portfolio = () => {
     const [active, setActive] = useState("All")
 
+    // Check if device is mobile
+    const isMobile = typeof window !== "undefined" && window.innerWidth <= 738;
+
     const filtered = active === "All" ? projects : projects.filter(p => p.category === active)
+
+    // Dynamic variants to remove animation lag on mobile
+    const dynamicCardVariants = {
+        hidden: { opacity: 0, y: isMobile ? 0 : 30, scale: isMobile ? 1 : 0.97 },
+        visible: (i) => ({
+            opacity: 1, y: 0, scale: 1,
+            transition: {
+                duration: isMobile ? 0.2 : 0.45,
+                delay: isMobile ? 0 : i * 0.07,
+                ease: "easeOut"
+            }
+        }),
+        exit: { opacity: 0, scale: isMobile ? 1 : 0.95, transition: { duration: 0.2 } }
+    }
 
     return (
         <div className='portfolio-v2'>
@@ -118,7 +135,7 @@ const Portfolio = () => {
                         <motion.div
                             className={`project-card ${project.featured ? 'featured' : ''}`}
                             key={project.id}
-                            variants={cardVariants}
+                            variants={dynamicCardVariants}
                             initial="hidden"
                             animate="visible"
                             exit="exit"

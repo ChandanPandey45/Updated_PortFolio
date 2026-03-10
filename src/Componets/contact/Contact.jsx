@@ -25,6 +25,9 @@ const Contact = () => {
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  // Check if device is mobile
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 738;
+
   const isInView = useInView(ref, { margin: "-100px" })
 
   const sendEmail = (e) => {
@@ -107,7 +110,7 @@ const Contact = () => {
           </svg>
         </motion.div>
 
-        <motion.form ref={formRef} onSubmit={sendEmail} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 2, duration: 1 }}>
+        <motion.form ref={formRef} onSubmit={sendEmail} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: isMobile ? 0 : 2, duration: 1 }}>
           <input type="text" required placeholder="Your Name" name="name" />
           <input type="email" required placeholder="Your Email" name="email" />
           <textarea rows={7} placeholder="Your Message" name="message" />
