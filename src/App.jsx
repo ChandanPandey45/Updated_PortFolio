@@ -1,7 +1,6 @@
 import './App.scss'
 import Navbar from './Componets/Navbar/Navbar'
 import Hero from './Componets/Hero/hero'
-import Parallax from './Componets/Parallax/Parallax'
 import Portfolio from './Componets/portfolio/Portfolio'
 import Contact from './Componets/contact/Contact'
 import About from './Componets/Aboutme/About'
@@ -28,9 +27,6 @@ function App() {
       </section>
 
       <section id='About'>
-        <Parallax type="services" />
-      </section>
-      <section>
         <About />
       </section>
 

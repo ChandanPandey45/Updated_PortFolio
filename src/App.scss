@@ -9,6 +9,10 @@ $secondary-color: #2a2b38;
 html {
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
+
+    @media (max-width: 738px) {
+        scroll-snap-type: none; // Disable snap for mobile scrolling
+    }
 }
 
 * {
@@ -34,6 +38,12 @@ section {
     scroll-snap-align: center;
     position: relative;
     z-index: 1;
+
+    @media (max-width: 738px) {
+        height: auto !important;
+        min-height: 100vh;
+        scroll-snap-align: none; // Disable scroll snapping on mobile for auto heights
+    }
 }
 
 section#Homepage {
@@ -43,18 +53,34 @@ section#Homepage {
 
 section#Experience {
     z-index: 8;
+
+    @media (max-width: 738px) {
+        z-index: 1;
+    }
 }
 
 section#MyProjects {
     z-index: 7;
+
+    @media (max-width: 738px) {
+        z-index: 1; // Reset to avoid covering items below when scrolling
+    }
 }
 
 section#About {
     z-index: 6;
+
+    @media (max-width: 738px) {
+        z-index: 1;
+    }
 }
 
 section#Contact {
     z-index: 5;
+
+    @media (max-width: 738px) {
+        z-index: 1;
+    }
 }
 
 @mixin mobile {
